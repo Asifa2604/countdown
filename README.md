@@ -796,7 +796,7 @@
                     <br><br>
                     Get ready for something special... 🎉
                 </div>
-                <div class="letter-signature">With love and best wishes,<br>Your Birthday Surprise Team ✨</div>
+                <div class="letter-signature">With love and best wishes,<br>-Asifa ✨</div>
             `;
             
             document.getElementById('personal-letter').innerHTML = letterContent;
