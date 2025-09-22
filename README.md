@@ -3,7 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 Birthday Surprise</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,12 +12,27 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #8A2BE2;
+            --secondary: #FF6B8B;
+            --accent: #4ECDC4;
+            --light: #F8F9FA;
+            --dark: #2D3748;
+            --gray: #718096;
+            --success: #38B2AC;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #8A2BE2 0%, #FF6B8B 50%, #4ECDC4 100%);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            color: var(--dark);
+            line-height: 1.6;
         }
 
         /* Background Animation */
@@ -35,9 +51,10 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             animation: float 8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .floating-shapes:nth-child(1) { left: 10%; animation-delay: 0s; }
@@ -60,15 +77,15 @@
         .page-section {
             display: none;
             min-height: 100vh;
-            padding: 2rem;
+            padding: 1.5rem;
             position: relative;
             z-index: 1;
+            align-items: center;
+            justify-content: center;
         }
 
         .page-section.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
             animation: fadeInUp 0.8s ease-out;
         }
 
@@ -87,23 +104,34 @@
         .container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 3rem;
+            border-radius: var(--radius);
+            padding: 2.5rem;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow);
             max-width: 600px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
         }
 
         /* Typography */
         .title {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #2d3748;
+            color: var(--dark);
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -111,76 +139,95 @@
 
         .subtitle {
             font-size: 1.1rem;
-            color: #718096;
-            margin-bottom: 2.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
             font-weight: 400;
         }
 
         /* Form Styles */
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             text-align: left;
+            position: relative;
         }
 
         .form-label {
             display: block;
             font-size: 1rem;
             font-weight: 600;
-            color: #2d3748;
+            color: var(--dark);
             margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
         }
 
         .form-input {
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem 1rem;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             background: rgba(255, 255, 255, 0.8);
+            font-family: 'Poppins', sans-serif;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
             background: rgba(255, 255, 255, 1);
         }
 
         .form-textarea {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
         }
 
         /* Button Styles */
         .btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
         }
 
         .btn-back {
-            background: linear-gradient(135deg, #718096, #4a5568);
+            background: linear-gradient(135deg, var(--gray), #4a5568);
             margin-right: 1rem;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 1.8rem;
             font-size: 1rem;
         }
 
         .btn-back:hover {
             box-shadow: 0 8px 20px rgba(113, 128, 150, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* Letter Styles */
@@ -189,14 +236,28 @@
             border-radius: 16px;
             padding: 2rem;
             margin: 2rem 0;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--primary);
             text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%238A2BE2" opacity="0.1" d="M50,0 C77.6,0 100,22.4 100,50 C100,77.6 77.6,100 50,100 C22.4,100 0,77.6 0,50 C0,22.4 22.4,0 50,0 Z"/></svg>') no-repeat;
+            background-size: contain;
+            transform: translate(30%, -30%);
         }
 
         .letter-greeting {
             font-size: 1.3rem;
             font-weight: 600;
-            color: #2d3748;
+            color: var(--dark);
             margin-bottom: 1rem;
         }
 
@@ -209,7 +270,7 @@
 
         .letter-signature {
             font-size: 1rem;
-            color: #718096;
+            color: var(--gray);
             font-style: italic;
             text-align: right;
             margin-top: 1.5rem;
@@ -228,6 +289,7 @@
             display: none;
             align-items: center;
             justify-content: center;
+            padding: 1.5rem;
         }
 
         .popup-overlay.show {
@@ -243,15 +305,26 @@
         .popup-container {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 3rem;
+            border-radius: var(--radius);
+            padding: 2.5rem;
             text-align: center;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
             max-width: 700px;
-            width: 90%;
+            width: 100%;
             border: 2px solid rgba(255, 255, 255, 0.3);
             position: relative;
             animation: popupSlideIn 0.8s ease-out;
+            overflow: hidden;
+        }
+
+        .popup-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
         }
 
         @keyframes popupSlideIn {
@@ -269,7 +342,7 @@
         .countdown-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 1.2rem;
             margin: 2rem 0;
         }
 
@@ -277,20 +350,38 @@
             background: linear-gradient(135deg, #f7fafc, #edf2f7);
             border-radius: 16px;
             padding: 1.5rem 1rem;
-            border: 2px solid rgba(102, 126, 234, 0.1);
-            transition: all 0.3s ease;
+            border: 2px solid rgba(138, 43, 226, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-unit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
         .time-unit:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            border-color: rgba(102, 126, 234, 0.3);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .time-unit:hover::before {
+            transform: scaleX(1);
         }
 
         .time-number {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #2d3748;
+            color: var(--dark);
             display: block;
             line-height: 1;
             margin-bottom: 0.5rem;
@@ -299,7 +390,7 @@
 
         .time-label {
             font-size: 0.875rem;
-            color: #718096;
+            color: var(--gray);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -309,7 +400,7 @@
         .celebration-title {
             font-size: 3rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -324,7 +415,7 @@
 
         .celebration-message {
             font-size: 1.5rem;
-            color: #2d3748;
+            color: var(--dark);
             margin-bottom: 2rem;
             line-height: 1.6;
         }
@@ -336,12 +427,12 @@
             height: 8px;
             border-radius: 50%;
             pointer-events: none;
+            z-index: 10;
         }
 
-        .blast-particle:nth-child(odd) { background: #ff6b6b; }
-        .blast-particle:nth-child(even) { background: #feca57; }
-        .blast-particle:nth-child(3n) { background: #48dbfb; }
-        .blast-particle:nth-child(4n) { background: #ff9ff3; }
+        .blast-particle:nth-child(odd) { background: var(--primary); }
+        .blast-particle:nth-child(even) { background: var(--secondary); }
+        .blast-particle:nth-child(3n) { background: var(--accent); }
 
         @keyframes blastOut {
             0% {
@@ -359,14 +450,15 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background: #ff6b6b;
+            background: var(--primary);
             animation: confetti-fall 3s linear infinite;
             pointer-events: none;
+            z-index: 5;
         }
 
-        .confetti:nth-child(odd) { background: #feca57; animation-delay: 0.5s; }
-        .confetti:nth-child(3n) { background: #48dbfb; animation-delay: 1s; }
-        .confetti:nth-child(4n) { background: #ff9ff3; animation-delay: 1.5s; }
+        .confetti:nth-child(odd) { background: var(--secondary); animation-delay: 0.5s; }
+        .confetti:nth-child(3n) { background: var(--accent); animation-delay: 1s; }
+        .confetti:nth-child(4n) { background: #FFD166; animation-delay: 1.5s; }
 
         @keyframes confetti-fall {
             0% {
@@ -388,11 +480,32 @@
             50% { transform: scale(1.05); }
         }
 
+        /* Progress Indicator */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 0.5rem;
+        }
+
+        .progress-step {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .progress-step.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container, .popup-container {
                 padding: 2rem;
-                margin: 1rem;
+                margin: 0.5rem;
             }
             
             .title {
@@ -409,7 +522,7 @@
             }
             
             .celebration-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .celebration-message {
@@ -417,17 +530,38 @@
             }
 
             .btn {
-                padding: 0.8rem 1.5rem;
+                padding: 1rem 2rem;
                 font-size: 1rem;
+                width: 100%;
+            }
+
+            .btn-group {
+                flex-direction: column;
             }
 
             .btn-back {
-                margin-right: 0.5rem;
+                margin-right: 0;
                 margin-bottom: 1rem;
             }
         }
 
         @media (max-width: 480px) {
+            .page-section {
+                padding: 1rem;
+            }
+            
+            .container, .popup-container {
+                padding: 1.5rem;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
             .countdown-container {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.8rem;
@@ -442,7 +576,39 @@
             }
             
             .celebration-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+            
+            .celebration-message {
+                font-size: 1.1rem;
+            }
+            
+            .letter-container {
+                padding: 1.5rem;
+            }
+            
+            .letter-greeting {
+                font-size: 1.1rem;
+            }
+            
+            .letter-content {
+                font-size: 1rem;
+            }
+        }
+
+        /* Tablet-specific adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                max-width: 700px;
+                padding: 3rem;
+            }
+            
+            .title {
+                font-size: 2.8rem;
+            }
+            
+            .countdown-container {
+                gap: 1.5rem;
             }
         }
     </style>
@@ -463,8 +629,14 @@
     <!-- Home Page -->
     <div class="page-section active" id="home-page">
         <div class="container">
-            <h1 class="title">🎉Hello..!!</h1>
-            <p class="subtitle">Let's create something special for you!</p>
+            <div class="progress-indicator">
+                <div class="progress-step active"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+            </div>
+            
+            <h1 class="title">🎉 Hello!</h1>
+            <p class="subtitle">Let's create something magical for your special day!</p>
             
             <form id="birthday-form">
                 <div class="form-group">
@@ -473,7 +645,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="favorite-thing">What's your favorite thing to do?</label>
+                    <label class="form-label" for="favorite-thing">What brings you joy?</label>
                     <input type="text" id="favorite-thing" class="form-input" placeholder="Reading, dancing, traveling..." required>
                 </div>
                 
@@ -482,7 +654,9 @@
                     <textarea id="wish" class="form-input form-textarea" placeholder="Share your dreams and aspirations..." required></textarea>
                 </div>
                 
-                <button type="submit" class="btn">✨ Create My Surprise</button>
+                <button type="submit" class="btn">
+                    <i class="fas fa-magic"></i> Create My Surprise
+                </button>
             </form>
         </div>
     </div>
@@ -490,10 +664,16 @@
     <!-- Did You Know Page -->
     <div class="page-section" id="did-you-know-page">
         <div class="container">
+            <div class="progress-indicator">
+                <div class="progress-step"></div>
+                <div class="progress-step active"></div>
+                <div class="progress-step"></div>
+            </div>
+            
             <h1 class="title">🌟 Did You Know?</h1>
             <p class="subtitle">Something magical is about to happen...</p>
             
-            <div style="font-size: 1.5rem; color: #667eea; font-weight: 600; margin: 2rem 0;">
+            <div style="font-size: 1.5rem; color: var(--primary); font-weight: 600; margin: 2rem 0;">
                 ✨ All your wishes will be fulfilled! ✨
             </div>
             
@@ -501,9 +681,13 @@
                 <!-- Letter content will be populated by JavaScript -->
             </div>
             
-            <div style="margin-top: 2rem;">
-                <button class="btn-back" onclick="goToPage('home-page')">← Back</button>
-                <button class="btn" onclick="showSurprise()">🎁 Click to Have a Surprise!</button>
+            <div class="btn-group">
+                <button class="btn btn-back" onclick="goToPage('home-page')">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="btn" onclick="showSurprise()">
+                    <i class="fas fa-gift"></i> Reveal Surprise!
+                </button>
             </div>
         </div>
     </div>
@@ -534,8 +718,8 @@
                     </div>
                 </div>
                 
-                <div style="font-size: 1.2rem; color: #4a5568; font-weight: 500;">
-                    🗓️ October 23rd, 2025
+                <div style="font-size: 1.2rem; color: #4a5568; font-weight: 500; margin-top: 1rem;">
+                    <i class="fas fa-calendar-alt"></i> October 23rd, 2025
                 </div>
             </div>
 
@@ -552,17 +736,18 @@
             </div>
             
             <div style="margin-top: 2rem;">
-                <button class="btn-back" onclick="closePopup()">← Close</button>
+                <button class="btn btn-back" onclick="closePopup()">
+                    <i class="fas fa-times"></i> Close
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Added audio element for birthday song -->
-    <audio id="birthday-song" preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
-        <source src="https://actions.google.com/sounds/v1/alarms/bugle_tune.ogg" type="audio/ogg">
-        <!-- Fallback to a more reliable birthday song -->
-        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_multimedia_alert_chime_bright_positive_001_26320.mp3" type="audio/mpeg">
+    <audio id="birthday-song" preload="auto" loop>
+        <source src="https://assets.codepen.io/1468070/happy-birthday-song.mp3" type="audio/mpeg">
+        <!-- Fallback to a simple chime if the birthday song fails to load -->
+        <source src="https://assets.codepen.io/1468070/bell-sound.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -582,7 +767,7 @@
             
             // Validate form
             if (!userData.name || !userData.favoriteThing || !userData.wish) {
-                alert('Please fill in all fields to create your surprise!');
+                showNotification('Please fill in all fields to create your surprise!', 'error');
                 return;
             }
             
@@ -591,6 +776,9 @@
             
             // Go to did you know page
             goToPage('did-you-know-page');
+            
+            // Update progress indicator
+            updateProgressIndicator('did-you-know-page');
         });
 
         // Generate personal letter
@@ -625,11 +813,67 @@
             document.getElementById(pageId).classList.add('active');
         }
 
+        // Update progress indicator
+        function updateProgressIndicator(currentPage) {
+            const steps = document.querySelectorAll('.progress-step');
+            steps.forEach(step => step.classList.remove('active'));
+            
+            if (currentPage === 'home-page') {
+                steps[0].classList.add('active');
+            } else if (currentPage === 'did-you-know-page') {
+                steps[1].classList.add('active');
+            } else if (currentPage === 'countdown-popup') {
+                steps[2].classList.add('active');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '1rem 1.5rem';
+            notification.style.borderRadius = '8px';
+            notification.style.color = 'white';
+            notification.style.fontWeight = '600';
+            notification.style.zIndex = '1001';
+            notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            notification.style.transform = 'translateX(150%)';
+            notification.style.transition = 'transform 0.3s ease';
+            
+            if (type === 'error') {
+                notification.style.background = 'linear-gradient(135deg, #FF6B6B, #FF8E8E)';
+            } else {
+                notification.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(150%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
         // Show surprise popup
         function showSurprise() {
             document.getElementById('countdown-popup').classList.add('show');
             createBlastEffect();
             startCountdown();
+            updateProgressIndicator('countdown-popup');
         }
 
         // Close popup
@@ -714,10 +958,10 @@
             
             if (element.textContent !== formattedValue) {
                 element.style.transform = 'scale(1.2)';
-                element.style.color = '#667eea';
+                element.style.color = 'var(--primary)';
                 setTimeout(() => {
                     element.style.transform = 'scale(1)';
-                    element.style.color = '#2d3748';
+                    element.style.color = 'var(--dark)';
                 }, 200);
             }
             
@@ -736,6 +980,7 @@
             celebrationSection.style.display = 'block';
             
             const song = document.getElementById('birthday-song');
+            song.volume = 0.5;
             song.play().catch(e => {
                 console.log('Could not play birthday song:', e);
                 // Fallback: try to play a different sound or show a message
@@ -781,6 +1026,28 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.time-number').forEach(element => {
                 element.style.transition = 'transform 0.2s ease, color 0.2s ease';
+            });
+            
+            // Add hover effects to buttons
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add focus effects to form inputs
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
             });
         });
     </script>
